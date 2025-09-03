@@ -2,8 +2,6 @@ from flask import Flask, request, render_template
 import joblib
 
 app = Flask(__name__)
-
-# Load your trained model
 pipe_lr = joblib.load(open("text_emotion.pkl", "rb"))
 
 @app.route('/', methods=['GET', 'POST'])

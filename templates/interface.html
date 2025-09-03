@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection</title>
+</head>
+<body>
+    <h2>Emotion Detection</h2>
+    <form method="POST">
+        <label for="user_text">Enter a sentence:</label><br>
+        <input type="text" id="user_text" name="user_text" value="{{ user_text }}" required><br><br>
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+        <h3>Prediction: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>

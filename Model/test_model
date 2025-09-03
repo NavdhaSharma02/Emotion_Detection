@@ -1,0 +1,27 @@
+import pandas as pd
+import neattext.functions as nfx
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score, classification_report
+import joblib
+df = pd.read_csv("tweet_emotions_2.csv")
+df['Clean_Text'] = df['Text'].apply(nfx.remove_userhandles)
+Xfeatures = df['Clean_Text']
+ylabels = df['Emotion']
+X_train, X_test, y_train, y_test = train_test_split(Xfeatures, ylabels, test_size=0.2, random_state=42)
+pipe_lr = Pipeline(steps=[
+    ('tfidf', TfidfVectorizer()),
+    ('lr', LogisticRegression(max_iter=1000))
+])
+pipe_lr.fit(X_train, y_train)
+y_pred = pipe_lr.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+joblib.dump(pipe_lr, "text_emotion.pkl")
+pipe_lr = joblib.load(open("text_emotion.pkl", "rb"))
+user_text = input("Enter a sentence to detect emotion: ")
+sample_text = [user_text]
+print("Prediction:", pipe_lr.predict(sample_text))
+print("Prediction Probabilities:", pipe_lr.predict_proba(sample_text))
