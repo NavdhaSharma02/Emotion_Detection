@@ -1,17 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Emotion Detection</title>
+    <title>Dear Diary</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            background: #f9f5f0;
+            color: #3e2c2c;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: #fffdf9;
+            padding: 30px;
+            border: 2px solid #d8cbbb;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            font-family: "Brush Script MT", cursive;
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #7b4f44;
+        }
+        label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #d8cbbb;
+            border-radius: 10px;
+            margin-top: 5px;
+            resize: none;
+        }
+        input[type="submit"] {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #7b4f44;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #5e3b33;
+        }
+        .prediction {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fdf4f0;
+            border-left: 5px solid #7b4f44;
+            font-style: italic;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Emotion Detection</h2>
-    <form method="POST">
-        <label for="user_text">Enter a sentence:</label><br>
-        <input type="text" id="user_text" name="user_text" value="{{ user_text }}" required><br><br>
-        <input type="submit" value="Predict">
-    </form>
-    {% if prediction %}
-        <h3>Prediction: {{ prediction }}</h3>
-    {% endif %}
+    <div class="container">
+        <h1>Dear Diary</h1>
+        <form method="POST">
+            <label for="user_text">Write your thoughts:</label><br>
+            <textarea id="user_text" name="user_text" required>{{ user_text }}</textarea><br>
+            <input type="submit" value="Save Entry for Today">
+        </form>
+
+        {% if prediction %}
+            <div class="prediction">
+                <strong>I noticed you are feeling:</strong> {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
