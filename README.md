@@ -8,7 +8,7 @@ An interactive diary-style web application that analyzes user-written entries an
 -  Designed a diary-inspired UI that feels like writing into a personal diary.  
 -  Implemented model persistence with Joblib for efficient reuse and fast predictions.  
 
-## 🛠 Tech Stack
+## Tech Stack
 - Python
 - Scikit-learn
 - Flask
